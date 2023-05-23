@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>UK Cities Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Create the map and set the initial view
+    var map = L.map('map').setView([54.5, -3], 6);
+
+    // Create a tile layer for the map background
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Define an array of cities with their coordinates and popup content
+    var cities = [
+      {
+        name: "London",
+        coordinates: [51.5074, -0.1278],
+        popupContent: "<h2>London</h2><p>The capital city of the United Kingdom.</p>"
+      },
+      {
+        name: "Manchester",
+        coordinates: [53.4831, -2.2441],
+        popupContent: "<h2>Manchester</h2><p>A major city in the northwest of England.</p>"
+      },
+      {
+        name: "Birmingham",
+        coordinates: [52.4862, -1.8904],
+        popupContent: "<h2>Birmingham</h2><p>A vibrant city in the West Midlands.</p>"
+      },
+      {
+        name: "Edinburgh",
+        coordinates: [55.9533, -3.1883],
+        popupContent: "<h2>Edinburgh</h2><p>The capital city of Scotland.</p>"
+      },
+      {
+        name: "Glasgow",
+        coordinates: [55.8642, -4.2518],
+        popupContent: "<h2>Glasgow</h2><p>The largest city in Scotland.</p>"
+      },
+      {
+        name: "Belfast",
+        coordinates: [54.5970, -5.9300],
+        popupContent: "<h2>Belfast</h2><p>The capital and largest city of Northern Ireland.</p>"
+      },
+      {
+        name: "Cardiff",
+        coordinates: [51.4816, -3.1791],
+        popupContent: "<h2>Cardiff</h2><p>The capital city of Wales.</p>"
+      },
+      {
+        name: "Bristol",
+        coordinates: [51.4545, -2.5879],
+        popupContent: "<h2>Bristol</h2><p>A vibrant city in the southwest of England.</p>"
+      },
+      {
+        name: "Liverpool",
+        coordinates: [53.4084, -2.9916],
+        popupContent: "<h2>Liverpool</h2><p>A city famous for its music and football heritage.</p>"
+      },
+      // Add more cities here...
+      // {
+      //   name: "City Name",
+      //   coordinates: [latitude, longitude],
+      //   popupContent: "<h2>City Name</h2><p>Description of the city.</p>"
+      // }
+    ];
+
+    // Create markers and bind popups for each city
+    cities.forEach(function(city) {
+      var marker = L.marker(city.coordinates).addTo(map).bindPopup(city.popupContent);
+      marker.on('click', function() {
+        marker.openPopup();
+      });
+    });
+  </script>
+</body>
+</html>
